@@ -7,7 +7,7 @@
   function show(id) { screens.forEach(s => $(s).classList.toggle('hidden',s!==id)); window.scrollTo(0,0); }
   function start(kind) { mode=kind; const pool=kind==='review' ? mistakes : kind==='essentials' ? window.ESSENTIAL_QUESTIONS : window.QUESTIONS; session=shuffle(pool).slice(0,kind==='exam'?30:pool.length); index=0; correct=0; mistakes=[]; show('quiz'); render(); }
   function render() {
-    locked=false; const item=session[index]; $('mode-label').textContent=mode==='exam'?'MOCK ENDTERM':mode==='review'?'PRACTICE MISTAKES':mode==='essentials'?'THE CORE 50':'FULL PRACTICE';
+    locked=false; const item=session[index]; $('mode-label').textContent=mode==='exam'?'MOCK ENDTERM':mode==='review'?'PRACTICE MISTAKES':mode==='essentials'?'THE CORE '+window.ESSENTIAL_QUESTIONS.length:'FULL PRACTICE';
     $('progress-text').textContent=`QUESTION ${index+1} OF ${session.length}`; $('score-text').textContent=`${correct} CORRECT`; $('progress-fill').style.width=`${index/session.length*100}%`;
     $('topic').textContent=item.topic.toUpperCase(); $('question-count').textContent=String(index+1).padStart(2,'0')+' / '+String(session.length).padStart(2,'0'); $('question').textContent=item.q;
     $('answers').replaceChildren(); $('feedback').className='feedback hidden'; $('hint').textContent='Select one answer'; $('next').classList.add('hidden');
